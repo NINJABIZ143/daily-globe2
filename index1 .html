@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Daily Globe | International News</title>
+
+<style>
+/* ===== RESET & BASE ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: linear-gradient(#f5f5f5, #eaeaea);
+    color: #111;
+    display: flex;
+}
+
+/* ===== RIGHT VERTICAL BANNER ===== */
+#right-banner {
+    width: 100px; /* più stretto */
+    height: 100vh; /* Altezza piena */
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-left: 1px solid #ccc;
+}
+
+#right-banner img {
+    width: 100%; 
+    height: calc(100% - 20px); /* lascia spazio per la scritta Pubblicità */
+    object-fit: cover;
+}
+
+#right-banner .ad-label {
+    font-size: 10px;
+    color: #555;
+    margin-bottom: 5px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* ===== PAGE CONTENT ===== */
+.page-content {
+    margin-right: 100px; /* spazio per il banner a destra */
+    width: calc(100% - 100px);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeDown { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+@keyframes fadeUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+/* ===== HEADER ===== */
+header {
+    background: white;
+    border-bottom: 4px solid #000;
+    text-align: center;
+    padding: 30px 10px;
+    animation: fadeDown 1s ease;
+}
+header h1 { font-size: 58px; letter-spacing: 4px; }
+header p { margin-top: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: #444; }
+
+/* ===== NAVBAR ===== */
+nav {
+    background: #000;
+    padding: 14px;
+    text-align: center;
+}
+nav a {
+    color: white;
+    margin: 0 20px;
+    font-size: 16px;
+    position: relative;
+}
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: white;
+    left: 0;
+    bottom: -4px;
+    transition: 0.3s;
+}
+nav a:hover::after { width: 100%; }
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    margin: 40px auto;
+    background: white;
+    padding: 35px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    animation: fadeUp 1.2s ease;
+}
+
+/* ===== BREAKING LABEL ===== */
+.breaking {
+    color: darkred;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* ===== MAIN ARTICLE ===== */
+.main-title {
+    font-size: 42px;
+    margin: 12px 0;
+}
+.subtitle {
+    font-style: italic;
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* ===== HEADER IMAGE ===== */
+.header-image img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    margin: 25px 0;
+}
+
+/* ===== COLUMNS ===== */
+.columns {
+    column-count: 2;
+    column-gap: 50px;
+    margin-top: 28px;
+}
+.columns p {
+    text-align: justify;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* ===== READ MORE BUTTON ===== */
+.readmore {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: bold;
+    color: darkred;
+    transition: 0.3s;
+}
+.readmore:hover { letter-spacing: 1px; }
+
+/* ===== SECONDARY NEWS ===== */
+.section-title {
+    margin-top: 60px;
+    font-size: 28px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 6px;
+}
+
+/* ===== NEWS GRID ===== */
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    margin-top: 25px;
+}
+.news-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: 0.3s;
+    animation: fadeIn 1.5s ease;
+}
+.news-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+}
+.news-box h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+.news-box p {
+    font-size: 16px;
+    text-align: justify;
+    color: #333;
+}
+
+/* ===== IMAGE UNDER EXTREME DIET ===== */
+.news-image {
+    text-align: center;
+    margin-top: 20px;
+}
+.news-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    font-size: 12px;
+    margin: 25px 0 10px 0;
+    color: #555;
+    animation: fadeIn 2s ease;
+}
+
+/* ===== CREDITS ===== */
+.credits {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    margin: 30px 0;
+    font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== VERTICAL RIGHT BANNER ===== -->
+<div id="right-banner">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.IKCfISkOEhpZQCy_dUL2zQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vertical Banner">
+    <div class="ad-label">*Pubblicità*</div>
+</div>
+
+<div class="page-content">
+
+<header>
+    <h1>The Daily Globe</h1>
+    <p>International • Entertainment • Health</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="news1.html">Breaking News</a>
+    <a href="news2.html">Health</a>
+</nav>
+
+<div class="container">
+
+    <span class="breaking">🌐 Breaking News</span>
+
+    <h2 class="main-title">
+        Hollywood Under Fire: Is a Secret Diet Endangering Celebrity Health?
+    </h2>
+
+    <p class="subtitle">
+        An exclusive investigation reveals a controversial trend behind perfect bodies
+    </p>
+
+    <div class="header-image">
+        <img src="https://media.zenfs.com/en/the_independent_577/96ecbcee0119431ff8a2a934f588180f" alt="Newspaper example image">
+    </div>
+
+    <div class="columns">
+        <p>
+            Behind the glamorous lights of Los Angeles, a disturbing truth is emerging.
+            A confidential investigation suggests that several A-list celebrities may
+            be following an extreme nutritional protocol known as the “Zero-G Diet”.
+        </p>
+
+        <p>
+            Promoted as a revolutionary solution for rapid physical transformation,
+            the diet allegedly replaces solid food with synthetic capsules.
+            Health experts warn that the long-term consequences could be severe.
+        </p>
+    </div>
+
+    <a class="readmore" href="news1.html">➜ Read the full article</a>
+
+    <h3 class="section-title">More Top Stories</h3>
+
+    <div class="news-grid">
+        <div class="news-box">
+            <h3>Extreme Diet Trends on Social Media</h3>
+            <p>
+                From liquid-only regimens to supplement-based nutrition,
+                online platforms are fueling dangerous health myths among young audiences.
+            </p>
+            <div class="news-image">
+                <img src="https://neurosciencenews.com/files/2022/11/toxic-diet-neurosicence-.jpg" alt="Toxic Diet News Image">
+            </div>
+            <a class="readmore" href="news2.html">➜ Read more</a>
+        </div>
+
+        <div class="news-box">
+            <h3>When Wellness Becomes Obsession</h3>
+            <p>
+                Experts explain how the pursuit of aesthetic perfection
+                can lead to unhealthy behaviors and unrealistic expectations.
+            </p>
+            <a class="readmore" href="news2.html">➜ Read more</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+© 2026 The Daily Globe – Educational Fake News Project
+</footer>
+
+<div class="credits">
+Lavoro svolto da: Balbo Gabriele, Tomas Tanase, Genti Metliu, Ashen K, Alex Lobato
+</div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
